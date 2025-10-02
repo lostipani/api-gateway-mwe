@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>A FIFO in-memory list</title>
+</head>
+
+<body>
+    <h1>Show the list</h1>
+    <div id="responseShow"></div>
+    <button id="showBtn">Show list</button>
+
+    <hr />
+
+    <h1>Insert an item to the list</h1>
+    <input type="text" id="insertItem" placeholder="Type in item" />
+    <button id="insertBtn">Insert</button>
+    <div id="responseInsert"></div>
+
+    <hr />
+
+    <h1>Pop an item from the list</h1>
+    <div id="responsePop"></div>
+    <button id="popBtn">Pop item</button>
+
+    <hr />
+
+    <script>
+        document.getElementById('showBtn').addEventListener('click', function () {
+            fetch(`/api`, { method: 'GET' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('responseShow').innerText = JSON.stringify(data);
+                });
+        });
+
+        document.getElementById('insertBtn').addEventListener('click', function () {
+            const item = document.getElementById('insertItem').value;
+            fetch(`/api/${encodeURIComponent(item)}`, {
+                method: 'POST',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('responseInsert').innerText = JSON.stringify(data);
+                });
+        });
+
+        document.getElementById('popBtn').addEventListener('click', function () {
+            fetch(`/api`, { method: 'DELETE' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('responsePop').innerText = JSON.stringify(data);
+                });
+        });
+    </script>
+</body>
+
+</html>
