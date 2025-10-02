@@ -1,6 +1,7 @@
 ### Archi
 ```
 Frontend (HTML) <-> API Gateway (Flask) <-> Resource Server (FastAPI)
+| ------------- client -------------- |     | ------ server ------- |
 ```
 
 ### Launch
